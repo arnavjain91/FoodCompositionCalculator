@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h2>Calculate Your BMI</h2>
+            <form id="bmi-form">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" required>
+                <button type="submit">Calculate BMI</button>
+            </form>
+            <p id="bmi-result"></p>
+        </section>
+
+        <section>
+            <h2>BMI Categories</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>BMI Category</th>
+                        <th>BMI Range</th>
+                        <th>Weight Range (for a 170 cm person)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Underweight</td>
+                        <td>Below 18.5</td>
+                        <td>Below 52 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Normal Weight</td>
+                        <td>18.5 - 24.9</td>
+                        <td>52 - 70 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Overweight</td>
+                        <td>25.0 - 29.9</td>
+                        <td>71 - 85 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Obesity</td>
+                        <td>30.0 and Above</td>
+                        <td>Above 85 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Understanding Dietary Requirements</p>
+    </footer>
+
+    <script>
+        document.getElementById('bmi-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert height to meters
+            const bmi = weight / (height * height);
+            const bmiResult = document.getElementById('bmi-result');
+            let category;
+
+            if (bmi < 18.5) {
+                category = 'Underweight';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                category = 'Normal Weight';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                category = 'Overweight';
+            } else {
+                category = 'Obesity';
+            }
+
+            bmiResult.textContent = `Your BMI is ${bmi.toFixed(2)} (${category})`;
+        });
+    </script>
+</body>
+
+</html>
